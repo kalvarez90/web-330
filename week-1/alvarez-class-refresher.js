@@ -6,7 +6,8 @@ console.log ('\n');
 ============================================
 ; Title:  function-class.js
 ; Author: Professor Krasso
-; Date:   7 August 2020
+; Date:   8 August 2020
+; Modified by: Karina Alvarez
 ; Description: Refresher on function classes
 ;===========================================
 */

@@ -6,7 +6,7 @@ console.log ('\n');
 ============================================
 ; Title:  duck-typing.js
 ; Author: Professor Krasso
-; Date:   28 February 2019
+; Date:   8 August 2020 
 : Modified by: Karina Alvarez
 ; Description: Demonstrates how to create interfaces
 ;              in a JavaScript program.

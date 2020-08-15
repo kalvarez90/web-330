@@ -12,12 +12,16 @@ console.log ('\n');
 ;===========================================
 */
 
+// start of program
+
+//object literal
 var person = {
   getAge: function() {
     return this.age;
   }
 };
 
+// creating new object
 var karina = Object.create(person, {
   'age': {
     'value': "30",
@@ -27,7 +31,9 @@ var karina = Object.create(person, {
   }
 });
 
+// output
 karina.getAge();
 console.log("The person's full name is", karina.fullName);
-console.log("The person's age is:", karina.age);
+console.log("The person's age is", karina.age);
 
+// end of program

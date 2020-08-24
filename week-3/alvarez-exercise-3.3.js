@@ -32,12 +32,15 @@ var DatabaseSingleton = (function() {
   };
 })();
 
+// new function name databaseSingletonTest
 function databaseSingletonTest() {
   var oracle = DatabaseSingleton.getInstance();
   var postgres = DatabaseSingleton.getInstance();
 
+//Output
   console.log('Same database instance?', oracle === postgres);
 }
 
+//calling the function
 databaseSingletonTest();
 // end of program

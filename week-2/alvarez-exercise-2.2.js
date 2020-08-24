@@ -7,6 +7,7 @@ console.log ('\n');
 ; Title:  alvarez-exercise-2.2.js
 ; Author: Professor Krasso
 ; Date:   15 August 2020
+; Modified by: Karina Alvarez
 ; Description: Demonstrates how to build
 ; prototypes in JavaScript.
 ;===========================================

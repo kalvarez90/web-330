@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <title> Exercise 4.3 - PUT and DELETE Operations</title>
+
+     <!-- jQuery reference -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <h2>HTTP DELETE Operations</h2>
+    <button id='delete'>Delete Security User</button>
+
+    <script type='text/javascript'>
+
+    $(function() {
+      $('#delete').click(function() {
+        $.ajax({
+          url: 'http://httpbin.org/delete',
+          dataType: 'json',
+          type: 'DELETE',
+          data: { username: 'karina', password: 'secret', email: 'example@gmail.com'},
+          success: function(data, status) {
+            console.log('Username: ' + data.form.username + '\nPassword: ' + data.form.password + '\nEmail: ' +data.form.email + '\nStatus: ' + status);
+          }
+        })
+      })
+    });
+    </script>
+
+  </body>
+</html>

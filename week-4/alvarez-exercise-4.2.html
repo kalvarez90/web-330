@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <title>Exercise 4.2 - GET and POST Operations</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  </head>
+
+  <body>
+    <h3>HTTP GET Operations</h3>
+    <button id='get'>HTTP GET Request</button>
+
+
+    <script type='text/javascript'>
+
+    $(function() {
+      $('#get').click(function() {
+        $.get("https://dog.ceo/api/breeds/image/random", function(data, status) {
+          console.log('Data: ' + JSON.stringify(data) + '\nStatus: ' + status);
+        });
+      })
+    });
+    </script>
+
+  </body>
+</html>

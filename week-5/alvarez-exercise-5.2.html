@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercise 5.2 - The Proxy Pattern</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500&display=swap" rel="stylesheet">
+
+    <!-- CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+
+    <!-- jquery Reference Library -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <style>
+      body {
+        font-family: 'Sora', Arial, Helvetica, sans-serif
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
+      <ul class='navbar-nav'>
+        <li class='nav-item'>
+          <a class='nav-link active' href='#'>Home</a>
+        </li>
+    </nav>
+    <br />
+
+    <div class="container">
+      <div class='row'>
+        <div class="col-md-12">
+          <h2>Exercise 5.2 - The Proxy Pattern</h2>
+          <button id="btnProxy">Run Proxy</button>
+
+          <br />
+          <span id="proxyExample"></span>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(function() {
+        // Example 1
+        var fullName = {
+          firstName: "Karina",
+          lastName: "Alvarez",
+          display: function() {
+            $("#proxyExample").append("<br />First Name: " + this.firstName + "<br />" + "Last Name: " + this.lastName);
+          }
+        };
+
+        $("#btnProxy").click($.proxy(fullName, "display"));
+
+      });
+    </script>
+  </body>
+</html>

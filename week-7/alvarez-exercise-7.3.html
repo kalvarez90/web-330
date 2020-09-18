@@ -1,0 +1,94 @@
+<!--
+============================================
+; Title:  alvarez-exercise-7.2.html
+; Author: Professor Krasso
+; Date:   16 September 2020
+; Modified by: Karina Alvarez
+; Description: Demonstrating the knockout.js
+; foreach binding
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Exercise 7.3</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <script src="../knockout-3.5.1.js"></script>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
+      <ul class='navbar-nav'>
+        <li class='nav-item'>
+          <a class='nav-link active' href='#'>Home</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='#'>About</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='#'>Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+    <br>
+    <br>
+
+    <div role="main" class="container">
+
+      <br>
+
+      <h2> The "foreach" binding </h2>
+
+      <br>
+      <br>
+
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: textbooks">
+          <tr>
+            <td data-bind="text: title"></td>
+            <td data-bind="text: price"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+
+    <script>
+      function TextbookViewModel() {
+        this.textbooks = ko.observableArray([
+          {title: "The Compound Effect", price: 20.12},
+          {title: "The power of habit", price: 11.98},
+          {title: "Tiny But Mighty", price: 13.29},
+          {title: "anxious for nothing", price: 11.79},
+          {title: "Blink: The Power of Thinking Without Thinking", price: 11.39}
+        ]);
+      }
+
+      ko.applyBindings(new TextbookViewModel());
+    </script>
+  </body>
+</html>

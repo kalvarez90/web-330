@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>CRUD Operations</title>
+
+      <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.1.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a id="nv" class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a id="nv" class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a id="nv" class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div role="main" class="container">
+      <br>
+      <br>
+
+      <h1>CRUD Example</h1>
+
+      <br>
+      <br>
+
+      <div class="row" data-bind="if:error">
+        <div class="col-sm-12">
+          <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong><span data-bind="text: error()"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+              <h3 class="card-title">Employee List</h3>
+              <div class="card-text">
+                <div class="form-group row">
+                  <label for="txtName" class="col-2 col-form-label">Name: </label>
+                  <div class="col-6">
+                    <input type="text" data-bind="value: nameToAdd, valueUpdate: 'afterkeydown'"
+                      class="form-control" id="txtName" />
+                  </div>
+                  <div class="col-4">
+                    <a href="#" data-bind="click: add" class="btn btn-primary">Add</a>
+                  </div>
+                </div>
+
+                <table class="table table-dark table-hover">
+                  <thead>
+                    <tr>
+                      <th>Employee Id</th>
+                      <th>Employee name</th>
+                      <th>Functions</th>
+                    </tr>
+                  </thead>
+                  <tbody data-bind="foreach: Employees">
+                    <tr>
+                      <td data-bind="text: Id"></td>
+                      <td data-bind="text: Name"></td>
+                      <td>
+                        <span>
+                          <a href="#" class="btn btn-success" data-bind="click: $root.edit">
+                            <i class="fa fa-pencil fa-lg"></i> Edit
+                          </a>
+                        </span>
+                        |
+                        <span>
+                          <a href="#" class="btn btn-danger" data-bind="click: $root.remove">
+                            <i class="fa fa-trash-o fa-lg"></i> Delete
+                          </a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4" data-bind="if: Employee">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+              <h3 class="card-title">Editing Window</h3>
+              <div class="card-text">
+                <div class="form-group">
+                  <label for="txtName">Name:</label>
+                  <input type="text" id="txtName" data-bind="value: Employee().Name" class="form-control"/>
+                </div>
+
+                <div class="form-group float-right">
+                  <button data-bind="click: $root.cancel" class="btn btn-group btn-danger">
+                    Cancel
+                  </button>
+                  <button data-bind="click: $root.update" class="btn btn-group btn-success">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+    </div>
+
+
+    <script>
+      function employee(id, name) {
+        this.Id = id;
+        this.Name = name;
+      }
+
+
+      var Employees = [
+        new employee('1', 'Karina'),
+        new employee('2', 'Jonathan'),
+        new employee('3', 'Elizabeth'),
+        new employee('4', 'Carlos'),
+        new employee('5', 'Robert')
+      ];
+
+      //Payroll View Model
+      function PayrollViewModel() {
+        var self = this;
+
+        self.error = ko.observable("");
+        self.Id = ko.observable(""),
+        self.Name = ko.observable("");
+        self.nameToAdd = ko.observable("");
+
+        var Employee = {
+          Id: self.Id,
+          Name: self.Name
+        };
+
+        self.Employee = ko.observable();
+        self.Employees = ko.observableArray(Employees);
+
+        //add function
+        self.add = function() {
+          if(self.nameToAdd() !== "" && self.Employees.indexOf(self.nameToAdd()) < 0) {
+            self.error("");
+
+            var addEmployee = self.Employees().length + 1;
+
+            //Adding name to list
+            self.Employees.push(new employee(addEmployee, self.nameToAdd()));
+          } else {
+            self.error("Duplicate or Invalid Entry");
+          }
+          self.nameToAdd("");
+        }
+
+        //edit function
+        self.edit = function(Employee) {
+          self.Employee(Employee);
+        };
+
+        //remove function
+        self.remove = function(Employee) {
+          self.Employees.remove(Employee);
+        };
+
+        //cancel function
+        self.cancel = function() {
+          self.Employee(null);
+        };
+
+        //update function
+        self.update = function() {
+          var newEmployee = self.Employee();
+          self.Employees.remove(self.Employee());
+          self.Employees.push(newEmployee);
+        };
+      };
+
+      ko.applyBindings(new PayrollViewModel());
+    </script>
+  </body>
+  </html>

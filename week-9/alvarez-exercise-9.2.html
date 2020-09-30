@@ -83,10 +83,10 @@
       });
 
       var Employees = new EmployeeCollection();
-      Employees.add(new Employee('001', 'Edward', 35000));
-      Employees.add(new Employee('002', 'Jason', 28000));
-      Employees.add(new Employee('003', 'Samantha', 34000));
-      Employees.add(new Employee('004', 'Danielle', 29000));
+      Employees.add(new Employee('001', 'Edward', '$35,000 / year'));
+      Employees.add(new Employee('002', 'Jason', '$28,000 / year'));
+      Employees.add(new Employee('003', 'Samantha', '$34,000 / year'));
+      Employees.add(new Employee('004', 'Danielle', '$29,000 / year'));
 
       Employees.each(function(employee) {
         $('#table-body').append(
